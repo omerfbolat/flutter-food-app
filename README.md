@@ -1,6 +1,6 @@
 # flutter_food_app
 
-A new Flutter project.
+A new Flutter project FOOD.
 
 ## Getting Started
 
