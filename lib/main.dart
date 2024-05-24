@@ -23,13 +23,14 @@ class MyApp extends StatelessWidget {
     return StoreProvider<AppStateWrapper>(
       store: store,
       child: MaterialApp(
+        theme: ThemeData(fontFamily: 'Sen'),
         title: 'Flutter Redux Navigation',
         initialRoute: '/',
         routes: {
           '/': (context) => SplashScreen(),
           '/welcome': (context) => const WelcomeScreen(),
           '/login': (context) => const LoginScreen(),
-          '/home': (context) => const HomeScreen(), 
+          '/home': (context) => const HomeScreen(),
         },
       ),
     );
