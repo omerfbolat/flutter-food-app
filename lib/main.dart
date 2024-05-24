@@ -26,10 +26,10 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Redux Navigation',
         initialRoute: '/',
         routes: {
-          '/': (context) => const SplashScreen(),
+          '/': (context) => SplashScreen(),
           '/welcome': (context) => const WelcomeScreen(),
           '/login': (context) => const LoginScreen(),
-          '/home': (context) => const HomeScreen(),
+          '/home': (context) => const HomeScreen(), 
         },
       ),
     );
