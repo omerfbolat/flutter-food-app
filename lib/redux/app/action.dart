@@ -1,0 +1,3 @@
+class LoginAction {}
+
+class LogoutAction {}
