@@ -73,69 +73,75 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: PageView.builder(
-              controller: _pageController,
-              onPageChanged: (int index) {
-                setState(() {
-                  _currentPage = index;
-                });
-              },
-              itemCount: _pages.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ImageBox(
-                        image: _pages[index]['image'],
-                        height: 292,
-                        width: 240,
-                      ),
-                      const SizedBox(height: 24),
-                      Text(
-                        _pages[index]['title']!,
-                        style: const TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        _pages[index]['subtitle']!,
-                        style: const TextStyle(fontSize: 16),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 50),
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: _buildPageIndicator(),
+      body: Stack(children: [
+        Column(
+          children: [
+            Expanded(
+              child: PageView.builder(
+                controller: _pageController,
+                onPageChanged: (int index) {
+                  setState(() {
+                    _currentPage = index;
+                  });
+                },
+                itemCount: _pages.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ImageBox(
+                          image: _pages[index]['image'],
+                          height: 292,
+                          width: 240,
                         ),
-                      ),
-                    ],
-                  ),
-                );
-              },
+                        const SizedBox(height: 24),
+                        Text(
+                          _pages[index]['title']!,
+                          style: const TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          _pages[index]['subtitle']!,
+                          style: const TextStyle(fontSize: 16),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: CustomButton(
+                text:
+                    _currentPage == _pages.length - 1 ? 'Get Started' : 'Next',
+                onPressed: _nextPage,
+              ),
+            ),
+            TextButton(
+              onPressed: _skip,
+              child: Text(_currentPage == _pages.length - 1 ? '' : 'Skip',
+                  style: const TextStyle(color: black)),
+            ),
+            const SizedBox(height: 25),
+          ],
+        ),
+        Positioned.fill(
+          bottom: 200,
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: _buildPageIndicator(),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: CustomButton(
-              text: _currentPage == _pages.length - 1 ? 'Get Started' : 'Next',
-              onPressed: _nextPage,
-            ),
-          ),
-          TextButton(
-            onPressed: _skip,
-            child: Text(_currentPage == _pages.length - 1 ? '' : 'Skip',
-                style: const TextStyle(color: black)),
-          ),
-          const SizedBox(height: 25),
-        ],
-      ),
+        ),
+      ]),
     );
   }
 }
