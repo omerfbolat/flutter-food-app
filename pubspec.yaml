@@ -64,6 +64,9 @@ flutter:
     - assets/images/food_logo.png
     - assets/images/splash.png
     - assets/images/splash2.png
+    - assets/images/1.png
+    - assets/images/2.png
+    - assets/images/3.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
