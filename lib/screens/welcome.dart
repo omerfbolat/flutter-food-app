@@ -128,7 +128,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           ),
           TextButton(
             onPressed: _skip,
-            child: Text('Skip', style: TextStyle(color: Colors.black)),
+            child: Text( _currentPage == _pages.length - 1 ? '' : 'Skip', style: TextStyle(color: Colors.black)),
           ),
           SizedBox(height: 25),
         ],
