@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food_app/utils/theme.dart';
 import 'package:flutter_food_app/widget/button.dart';
+import 'package:flutter_food_app/widget/image.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -61,7 +63,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       margin: EdgeInsets.symmetric(horizontal: 4.0),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: isActive ? const Color(0xFFFF7622) : const Color(0xFFFFE1CE) ,
+        color: isActive ? primary : primaryLight ,
       ),
     );
   }
@@ -86,18 +88,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset(_pages[index]['image']!),
-                      Padding(padding: const EdgeInsets.all(30),
-                        child:  Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: _buildPageIndicator(),
-                        ),
-                      ),
+                      ImageBox(
+                            image: _pages[index]['image'],
+                            height: 292,
+                            width: 240,
+                          ),
                       const SizedBox(height: 24),
                       Text(
                         _pages[index]['title']!,
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 16),
@@ -106,29 +105,32 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         style: TextStyle(fontSize: 16),
                         textAlign: TextAlign.center,
                       ),
+                      SizedBox(height: 50),
+                      Center(
+                        child:  Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: _buildPageIndicator(),
+                        ),
+                      ),
                     ],
                   ),
                 );
               },
             ),
           ),
-          SizedBox(height: 16),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: CustomButton(
               text: _currentPage == _pages.length - 1 ? 'Get Started' : 'Next',
               onPressed: _nextPage,
-              color: Color(0xFFFF7622),
-              textColor: Colors.white,
-              width: double.infinity,
-              height: 62.0,
+              color: primary,
             ),
           ),
           TextButton(
             onPressed: _skip,
             child: Text('Skip', style: TextStyle(color: Colors.black)),
           ),
-          SizedBox(height: 16),
+          SizedBox(height: 25),
         ],
       ),
     );

@@ -5,22 +5,24 @@ class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
   final Color color;
   final Color textColor;
-  final double width;
+  final String width;
   final double height;
 
   CustomButton({
     required this.text,
     required this.onPressed,
-    this.color = const Color(0xFFFF7622),
+    required this.color,
     this.textColor = Colors.white,
-    this.width = 327.0,
+    this.width = '100%',
     this.height = 62.0,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width,
+      width: width == '100%'
+          ? MediaQuery.of(context).size.width
+          : MediaQuery.of(context).size.width * (double.parse(width.replaceAll('%', '')) / 100),
       height: height,
       child: ElevatedButton(
         onPressed: onPressed,
