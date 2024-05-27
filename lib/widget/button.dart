@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food_app/utils/theme.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -8,11 +9,12 @@ class CustomButton extends StatelessWidget {
   final String width;
   final double height;
 
-  CustomButton({
+  const CustomButton({
+    super.key,
     required this.text,
     required this.onPressed,
-    required this.color,
-    this.textColor = Colors.white,
+    this.color = primary,
+    this.textColor = white,
     this.width = '100%',
     this.height = 62.0,
   });
@@ -22,7 +24,8 @@ class CustomButton extends StatelessWidget {
     return SizedBox(
       width: width == '100%'
           ? MediaQuery.of(context).size.width
-          : MediaQuery.of(context).size.width * (double.parse(width.replaceAll('%', '')) / 100),
+          : MediaQuery.of(context).size.width *
+              (double.parse(width.replaceAll('%', '')) / 100),
       height: height,
       child: ElevatedButton(
         onPressed: onPressed,
@@ -32,7 +35,7 @@ class CustomButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.0),
           ),
-          textStyle: TextStyle(fontSize: 16),
+          textStyle: const TextStyle(fontSize: 16),
         ),
         child: Text(text),
       ),

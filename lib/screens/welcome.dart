@@ -19,24 +19,26 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       'image': 'assets/images/1.png',
       'title': 'All your favorites',
       'subtitle':
-      'Get all your loved foods in one once place, you just place the order we do the rest'
+          'Get all your loved foods in one once place, you just place the order we do the rest'
     },
     {
       'image': 'assets/images/2.png',
       'title': 'Order from choosen chef',
-      'subtitle': 'Get all your loved foods in one once place, you just place the orer we do the rest'
+      'subtitle':
+          'Get all your loved foods in one once place, you just place the orer we do the rest'
     },
     {
       'image': 'assets/images/3.png',
       'title': 'Free delivery offers',
-      'subtitle': 'Get all your loved foods in one once place, you just place the orer we do the rest'
+      'subtitle':
+          'Get all your loved foods in one once place, you just place the orer we do the rest'
     },
   ];
 
   void _nextPage() {
     if (_currentPage < _pages.length - 1) {
       _pageController.nextPage(
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
     } else {
@@ -60,10 +62,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Container(
       width: 10.0,
       height: 10.0,
-      margin: EdgeInsets.symmetric(horizontal: 4.0),
+      margin: const EdgeInsets.symmetric(horizontal: 4.0),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: isActive ? primary : primaryLight ,
+        color: isActive ? primary : primaryLight,
       ),
     );
   }
@@ -89,25 +91,26 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ImageBox(
-                            image: _pages[index]['image'],
-                            height: 292,
-                            width: 240,
-                          ),
+                        image: _pages[index]['image'],
+                        height: 292,
+                        width: 240,
+                      ),
                       const SizedBox(height: 24),
                       Text(
                         _pages[index]['title']!,
-                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 16),
                       Text(
                         _pages[index]['subtitle']!,
-                        style: TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 16),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 50),
+                      const SizedBox(height: 50),
                       Center(
-                        child:  Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: _buildPageIndicator(),
                         ),
@@ -123,14 +126,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             child: CustomButton(
               text: _currentPage == _pages.length - 1 ? 'Get Started' : 'Next',
               onPressed: _nextPage,
-              color: primary,
             ),
           ),
           TextButton(
             onPressed: _skip,
-            child: Text( _currentPage == _pages.length - 1 ? '' : 'Skip', style: TextStyle(color: Colors.black)),
+            child: Text(_currentPage == _pages.length - 1 ? '' : 'Skip',
+                style: const TextStyle(color: black)),
           ),
-          SizedBox(height: 25),
+          const SizedBox(height: 25),
         ],
       ),
     );
