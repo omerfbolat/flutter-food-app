@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food_app/screens/forget_password.dart';
+import 'package:flutter_food_app/screens/send_code.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'redux/store.dart';
@@ -31,6 +33,8 @@ class MyApp extends StatelessWidget {
           '/welcome': (context) => const WelcomeScreen(),
           '/login': (context) => const LoginScreen(),
           '/home': (context) => const HomeScreen(),
+          '/forget_password': (context) => const ForgetPasswordScreen(),
+          '/send_code': (context) => const SendCodeScreen(),
         },
       ),
     );
