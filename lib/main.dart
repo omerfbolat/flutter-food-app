@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_food_app/screens/forget_password.dart';
-import 'package:flutter_food_app/screens/send_code.dart';
-import 'package:flutter_food_app/db/mongodb.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'redux/store.dart';
+import 'db/mongodb.dart';
+
 import 'screens/splash_screen.dart';
 import 'screens/welcome.dart';
 import 'screens/login.dart';
 import 'screens/home.dart';
+import 'screens/forget_password.dart';
+import 'screens/send_code.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
