@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food_app/db/mongodb.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'redux/store.dart';
@@ -7,7 +8,10 @@ import 'screens/welcome.dart';
 import 'screens/login.dart';
 import 'screens/home.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await MongoDatabase.connect();
+
   final store = createStore();
 
   runApp(MyApp(store: store));
