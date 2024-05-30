@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_food_app/screens/sign_up.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'redux/store.dart';
@@ -11,10 +10,16 @@ import 'screens/login.dart';
 import 'screens/home.dart';
 import 'screens/forget_password.dart';
 import 'screens/send_code.dart';
+import 'screens/sign_up.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await MongoDatabase.connect();
+  var productsCollection = MongoDatabase.productsCollection;
+
+  var productDocs = await productsCollection.find().toList();
+
+  print(productDocs);
 
   final store = createStore();
 
