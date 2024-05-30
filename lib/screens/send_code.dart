@@ -31,7 +31,7 @@ class _SendCodeContainerState extends State<SendCodeContainer> {
       } else {
         setState(() {
           _isCounting = false;
-          _countDown = 60; // Reset the countdown
+          _countDown = 60;
         });
       }
     });
@@ -125,9 +125,7 @@ class _SendCodeContainerState extends State<SendCodeContainer> {
         CustomButton(
           text: 'VERIFY',
           onPressed: () {
-            // Start countdown when the button is pressed
             _startCountDown();
-            // You can add other functionality here like sending the code
             Navigator.pushNamed(context, '/home');
           },
         ),
@@ -157,6 +155,20 @@ class SendCodeScreen extends StatelessWidget {
             ),
           ),
           Positioned(
+            top: 50,
+            left: 20,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/forget_password');
+              },
+              child: Image.asset(
+                'assets/images/back_button.png',
+                width: 45,
+                height: 45,
+              ),
+            ),
+          ),
+          Positioned(
             top: 0,
             right: -50,
             child: Image.asset(
@@ -173,7 +185,7 @@ class SendCodeScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Log In',
+                    'Verification',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,
@@ -181,11 +193,14 @@ class SendCodeScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10),
-                  Text(
-                    'Please sign in to your existing account',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
+                  Center(
+                    child: Text(
+                      'We have sent a code to your email example@gmail.com',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                   SizedBox(height: 20),
