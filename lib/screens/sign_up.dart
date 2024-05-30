@@ -3,8 +3,8 @@ import 'package:flutter_food_app/widget/button.dart';
 import '../utils/theme.dart';
 import '../widget/input.dart';
 
-class ForgetPasswordScreen extends StatelessWidget {
-  const ForgetPasswordScreen({Key? key}) : super(key: key);
+class SignupScreen extends StatelessWidget {
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Forgot Password',
+                    'Sign Up',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,
@@ -62,7 +62,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'Please sign in to your existing account',
+                    'Please sign up to get started',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -91,12 +91,24 @@ class ForgetPasswordScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     CustomInput(
+                      title: 'Name',
+                      hintText: 'John doe',
+                    ),
+                    CustomInput(
                       title: 'EMAIL',
                       hintText: 'example@gmail.com',
                     ),
-                    SizedBox(height: 10),
+                    CustomInput(
+                      title: 'Password',
+                      hintText: '* * * * * * * * * *',
+                    ),
+                    CustomInput(
+                      title: 'Re-Type Password',
+                      hintText: '* * * * * * * * * *',
+                    ),
+                    SizedBox(height: 30),
                     CustomButton(
-                      text: 'SEND CODE',
+                      text: 'Sign Up',
                       onPressed:  () {
                         Navigator.pushNamed(context, '/send_code');
                       },
