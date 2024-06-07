@@ -1,10 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food_app/db/registerUser.dart';
 import 'package:flutter_food_app/widget/button.dart';
 import '../utils/theme.dart';
 import '../widget/input.dart';
 
-class SignupScreen extends StatelessWidget {
+class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
+
+  @override
+  _SignupScreenState createState() => _SignupScreenState();
+}
+
+class _SignupScreenState extends State<SignupScreen> {
+  String name = '';
+  String email = '';
+  String password = '';
+  String confirmPassword = '';
+
+  void snackBarError(BuildContext context, String text) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(backgroundColor: error, content: Text(text)),
+    );
+  }
+
+  Future<void> signUp(context) async {
+    if (name.isEmpty) {
+      snackBarError(context, 'Please enter your name');
+      return;
+    }
+
+    if (!name.contains(' ')) {
+      snackBarError(context, 'Please enter at least first and last name');
+      return;
+    }
+
+    if (email.isEmpty) {
+      snackBarError(context, 'Please enter your email');
+      return;
+    }
+
+    if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(email)) {
+      snackBarError(context, 'Please enter a valid email');
+      return;
+    }
+
+    if (password.isEmpty) {
+      snackBarError(context, 'Please enter your password');
+      return;
+    }
+
+    if (password.length < 6) {
+      snackBarError(context, 'Password must be at least 6 characters long');
+      return;
+    }
+
+    if (password != confirmPassword) {
+      snackBarError(context, 'Passwords do not match');
+      return;
+    }
+
+    if (await isEmailRegistered(email)) {
+      snackBarError(context, 'Email is already registered');
+      return;
+    }
+
+    await registerUser(name, email, password);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+          backgroundColor: Colors.green,
+          content: Text('User registered successfully!')),
+    );
+    Navigator.pushNamed(context, '/login');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +113,10 @@ class SignupScreen extends StatelessWidget {
               height: 400,
             ),
           ),
-          Align(
+          const Align(
             alignment: Alignment.topCenter,
             child: Padding(
-              padding: const EdgeInsets.only(top: 100, left: 20, right: 20),
+              padding: EdgeInsets.only(top: 100, left: 20, right: 20),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -78,7 +146,7 @@ class SignupScreen extends StatelessWidget {
             left: 0,
             right: 0,
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20.0),
@@ -91,29 +159,43 @@ class SignupScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     CustomInput(
-                      title: 'Name',
-                      hintText: 'John doe',
-                    ),
+                        title: 'Name',
+                        hintText: 'John doe',
+                        onChanged: (text) {
+                          setState(() {
+                            name = text;
+                          });
+                        }),
                     CustomInput(
-                      title: 'EMAIL',
-                      hintText: 'example@gmail.com',
-                    ),
+                        title: 'EMAIL',
+                        hintText: 'example@gmail.com',
+                        onChanged: (text) {
+                          setState(() {
+                            email = text;
+                          });
+                        }),
                     CustomInput(
-                      title: 'Password',
-                      hintText: '* * * * * * * * * *',
-                    ),
+                        title: 'Password',
+                        hintText: '* * * * * * * * * *',
+                        onChanged: (text) {
+                          setState(() {
+                            password = text;
+                          });
+                        }),
                     CustomInput(
-                      title: 'Re-Type Password',
-                      hintText: '* * * * * * * * * *',
-                    ),
-                    SizedBox(height: 30),
+                        title: 'Re-Type Password',
+                        hintText: '* * * * * * * * * *',
+                        onChanged: (text) {
+                          setState(() {
+                            confirmPassword = text;
+                          });
+                        }),
+                    const SizedBox(height: 30),
                     CustomButton(
                       text: 'Sign Up',
-                      onPressed:  () {
-                        Navigator.pushNamed(context, '/send_code');
-                      },
+                      onPressed: () => signUp(context),
                     ),
-                    SizedBox(height: 600),
+                    const SizedBox(height: 600),
                   ],
                 ),
               ),

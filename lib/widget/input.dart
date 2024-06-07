@@ -14,6 +14,7 @@ class CustomInput extends StatefulWidget {
   final FocusNode? focusNode;
   final FocusNode? nextFocusNode;
   final FocusNode? previousFocusNode;
+  final Function(String)? onChanged;
 
   const CustomInput({
     Key? key,
@@ -29,6 +30,7 @@ class CustomInput extends StatefulWidget {
     this.focusNode,
     this.nextFocusNode,
     this.previousFocusNode,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -44,7 +46,7 @@ class _CustomInputState extends State<CustomInput> {
     });
   }
 
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
@@ -59,12 +61,14 @@ class _CustomInputState extends State<CustomInput> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: widget.isCentered ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+      crossAxisAlignment: widget.isCentered
+          ? CrossAxisAlignment.center
+          : CrossAxisAlignment.start,
       children: [
         if (widget.title != null)
           Text(
             widget.title!,
-            style: TextStyle(
+            style: const TextStyle(
               color: font,
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -78,34 +82,41 @@ class _CustomInputState extends State<CustomInput> {
             child: TextField(
               controller: _controller,
               obscureText: widget.isPassword ? _obscureText : false,
-              keyboardType: widget.isNumeric ? TextInputType.number : TextInputType.text,
+              keyboardType:
+                  widget.isNumeric ? TextInputType.number : TextInputType.text,
               textAlign: widget.isCentered ? TextAlign.center : TextAlign.start,
               maxLength: widget.maxLength,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: infoLight,
                 hintText: widget.useHintAsPlaceholder ? widget.hintText : null,
-                hintStyle: TextStyle(color: fontPlaceholder),
+                hintStyle: const TextStyle(color: fontPlaceholder),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide.none,
                 ),
-                contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                 counterText: '',
                 suffixIcon: widget.isPassword
                     ? IconButton(
-                  icon: Icon(
-                    _obscureText ? Icons.visibility : Icons.visibility_off,
-                    color: fontPlaceholder,
-                  ),
-                  onPressed: _toggleObscureText,
-                )
+                        icon: Icon(
+                          _obscureText
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: fontPlaceholder,
+                        ),
+                        onPressed: _toggleObscureText,
+                      )
                     : null,
               ),
               focusNode: widget.focusNode,
-              onChanged: (_) {
+              onChanged: (text) {
                 if (_controller.text.isEmpty) {
                   widget.previousFocusNode?.requestFocus();
+                }
+                if (widget.onChanged != null) {
+                  widget.onChanged!(text);
                 }
               },
               onSubmitted: (_) {
