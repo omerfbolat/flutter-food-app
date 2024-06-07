@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import '../redux/app/state.dart';
 import '../redux/category/action.dart';
 import '../redux/store.dart';
 import '../redux/app/action.dart';
@@ -34,6 +35,17 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('Welcome Home!'),
+            StoreConnector<AppStateWrapper, AppState>(
+              converter: (store) => store.state.appState,
+              builder: (context, appState) {
+                return Column(
+                  children: <Widget>[
+                    Text('FullName: ${appState.fullname}'),
+                    Text('Email: ${appState.email}'),
+                  ],
+                );
+              },
+            ),
             StoreConnector<AppStateWrapper, VoidCallback>(
               converter: (store) {
                 return () => store

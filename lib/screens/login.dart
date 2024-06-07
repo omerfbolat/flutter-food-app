@@ -1,10 +1,65 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_food_app/widget/button.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import '../db/loginUser.dart';
+import '../redux/app/action.dart';
+import '../redux/store.dart';
 import '../utils/theme.dart';
 import '../widget/input.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  String email = '';
+  String password = '';
+  bool rememberMe = false;
+
+  void snackBarError(BuildContext context, String text) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(backgroundColor: error, content: Text(text)),
+    );
+  }
+
+  Future<void> loginUp(BuildContext context) async {
+    if (email.isEmpty) {
+      snackBarError(context, 'Please enter your email');
+      return;
+    }
+
+    if (password.isEmpty) {
+      snackBarError(context, 'Please enter your password');
+      return;
+    }
+
+    final result = await loginUser(email, password);
+
+    if (result != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            backgroundColor: Colors.green,
+            content: Text('Login successfully!')),
+      );
+
+      StoreProvider.of<AppStateWrapper>(context).dispatch(
+        LoginAction(
+          token: result['token'],
+          email: result['email'],
+          fullname: result['name'],
+        ),
+      );
+
+      Navigator.pushNamed(context, '/home');
+    } else {
+      snackBarError(context, 'Invalid email or password');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +86,10 @@ class LoginScreen extends StatelessWidget {
               height: 400,
             ),
           ),
-          Align(
+          const Align(
             alignment: Alignment.topCenter,
             child: Padding(
-              padding: const EdgeInsets.only(top: 100, left: 20, right: 20),
+              padding: EdgeInsets.only(top: 100, left: 20, right: 20),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -64,7 +119,7 @@ class LoginScreen extends StatelessWidget {
             left: 0,
             right: 0,
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20.0),
@@ -77,15 +132,23 @@ class LoginScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     CustomInput(
-                      title: 'EMAIL',
-                      hintText: 'example@gmail.com',
-                    ),
-                    SizedBox(height: 10),
+                        title: 'EMAIL',
+                        hintText: 'example@gmail.com',
+                        onChanged: (text) {
+                          setState(() {
+                            email = text;
+                          });
+                        }),
+                    const SizedBox(height: 10),
                     CustomInput(
-                      title: 'PASSWORD',
-                      hintText: '* * * * * * * * * *',
-                      isPassword: true,
-                    ),
+                        title: 'PASSWORD',
+                        hintText: '* * * * * * * * * *',
+                        isPassword: true,
+                        onChanged: (text) {
+                          setState(() {
+                            password = text;
+                          });
+                        }),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -95,7 +158,7 @@ class LoginScreen extends StatelessWidget {
                               value: false,
                               onChanged: (newValue) {},
                             ),
-                            Text(
+                            const Text(
                               'Remember me',
                               style: TextStyle(
                                 color: fontPlaceholder,
@@ -108,7 +171,7 @@ class LoginScreen extends StatelessWidget {
                           onTap: () {
                             Navigator.pushNamed(context, '/forget_password');
                           },
-                          child: Text(
+                          child: const Text(
                             'Forgot Password?',
                             style: TextStyle(
                               color: primary,
@@ -118,19 +181,17 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     CustomButton(
                       text: 'LOG IN',
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/home');
-                      },
+                      onPressed: () => loginUp(context),
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             'Don’t have an account?',
                             style: TextStyle(
                               color: fontPlaceholder,
@@ -138,12 +199,12 @@ class LoginScreen extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           GestureDetector(
                             onTap: () {
-                            Navigator.pushNamed(context, '/sign_up');
-                          },
-                            child: Text(
+                              Navigator.pushNamed(context, '/sign_up');
+                            },
+                            child: const Text(
                               'SIGN UP',
                               style: TextStyle(
                                 color: primary,
@@ -155,7 +216,7 @@ class LoginScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 150),
+                    const SizedBox(height: 150),
                   ],
                 ),
               ),

@@ -2,9 +2,30 @@ import 'package:flutter/foundation.dart';
 
 @immutable
 class AppState {
-  final bool isAuthenticated;
+  final String token;
+  final String email;
+  final String fullname;
 
-  const AppState({required this.isAuthenticated});
+  const AppState({
+    required this.token,
+    required this.email,
+    required this.fullname,
+  });
 
-  const AppState.initialState() : isAuthenticated = false;
+  const AppState.initialState()
+      : token = '',
+        email = '',
+        fullname = '';
+
+  AppState copyWith({
+    String? token,
+    String? email,
+    String? fullname,
+  }) {
+    return AppState(
+      token: token ?? this.token,
+      email: email ?? this.email,
+      fullname: fullname ?? this.fullname,
+    );
+  }
 }
