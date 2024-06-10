@@ -1,7 +1,5 @@
-class LoadCategoriesAction {}
-
 class SetCategoriesAction {
-  final List<String> categories;
+  final List<Map<String, String>> categories;
 
   SetCategoriesAction(this.categories);
 }

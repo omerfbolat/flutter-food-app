@@ -3,6 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import '../redux/category/action.dart';
 import '../redux/store.dart';
 import '../redux/app/action.dart';
+import '../widget/categories.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -36,8 +37,11 @@ class HomeScreen extends StatelessWidget {
             const Text('Welcome Home!'),
             StoreConnector<AppStateWrapper, VoidCallback>(
               converter: (store) {
-                return () => store
-                    .dispatch(SetCategoriesAction(['Category1', 'Category2']));
+                return () => store.dispatch(SetCategoriesAction([
+                      {'text': 'All', 'image': ''},
+                      {'text': 'Hot Dog', 'image': 'assets/images/doghot.png'},
+                      {'text': 'Burger', 'image': ''}
+                    ]));
               },
               builder: (context, callback) {
                 return ElevatedButton(
@@ -48,12 +52,16 @@ class HomeScreen extends StatelessWidget {
                 );
               },
             ),
-            StoreConnector<AppStateWrapper, List<String>>(
+            StoreConnector<AppStateWrapper, List<Map<String, String>>>(
               converter: (store) => store.state.categoryState.categories,
               builder: (context, categories) {
-                return Column(
-                  children:
-                      categories.map((category) => Text(category)).toList(),
+                return CategoriesSlider(
+                  categories: categories.map((category) {
+                    return {
+                      "text": category['text'],
+                      "image": category['image']
+                    };
+                  }).toList(),
                 );
               },
             ),

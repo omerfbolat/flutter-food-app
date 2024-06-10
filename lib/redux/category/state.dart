@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 
 @immutable
 class CategoryState {
-  final List<String> categories;
+  final List<Map<String, String>> categories;
 
   const CategoryState({required this.categories});
 
