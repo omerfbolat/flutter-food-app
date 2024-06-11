@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food_app/widget/card.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import '../redux/category/action.dart';
 import '../redux/store.dart';
@@ -64,6 +65,14 @@ class HomeScreen extends StatelessWidget {
                   }).toList(),
                 );
               },
+            ),
+            CustomCard(
+              title: 'Rose Garden Restaurant',
+              image: 'assets/images/card1.jpg',
+              keys: ['Burger', 'Chiken', 'Riche', 'Wings'],
+              point: 4.5,
+              delivery: 'Free',
+              time: '30 min',
             ),
           ],
         ),
