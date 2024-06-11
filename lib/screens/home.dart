@@ -73,6 +73,7 @@ class HomeScreen extends StatelessWidget {
               point: 4.5,
               delivery: 'Free',
               time: '30 min',
+              onPressed:() => {},
             ),
           ],
         ),
