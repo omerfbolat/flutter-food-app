@@ -14,6 +14,7 @@ class CustomInput extends StatefulWidget {
   final FocusNode? focusNode;
   final FocusNode? nextFocusNode;
   final FocusNode? previousFocusNode;
+  final bool search;
 
   const CustomInput({
     Key? key,
@@ -29,6 +30,7 @@ class CustomInput extends StatefulWidget {
     this.focusNode,
     this.nextFocusNode,
     this.previousFocusNode,
+    this.search = false,
   }) : super(key: key);
 
   @override
@@ -59,7 +61,9 @@ class _CustomInputState extends State<CustomInput> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: widget.isCentered ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+      crossAxisAlignment: widget.isCentered
+          ? CrossAxisAlignment.center
+          : CrossAxisAlignment.start,
       children: [
         if (widget.title != null)
           Text(
@@ -78,7 +82,8 @@ class _CustomInputState extends State<CustomInput> {
             child: TextField(
               controller: _controller,
               obscureText: widget.isPassword ? _obscureText : false,
-              keyboardType: widget.isNumeric ? TextInputType.number : TextInputType.text,
+              keyboardType:
+                  widget.isNumeric ? TextInputType.number : TextInputType.text,
               textAlign: widget.isCentered ? TextAlign.center : TextAlign.start,
               maxLength: widget.maxLength,
               decoration: InputDecoration(
@@ -90,16 +95,25 @@ class _CustomInputState extends State<CustomInput> {
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide.none,
                 ),
-                contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                 counterText: '',
                 suffixIcon: widget.isPassword
                     ? IconButton(
-                  icon: Icon(
-                    _obscureText ? Icons.visibility : Icons.visibility_off,
-                    color: fontPlaceholder,
-                  ),
-                  onPressed: _toggleObscureText,
-                )
+                        icon: Icon(
+                          _obscureText
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: fontPlaceholder,
+                        ),
+                        onPressed: _toggleObscureText,
+                      )
+                    : null,
+                prefixIcon: widget.search
+                    ? Icon(
+                        Icons.search,
+                        color: fontPlaceholder,
+                      )
                     : null,
               ),
               focusNode: widget.focusNode,
