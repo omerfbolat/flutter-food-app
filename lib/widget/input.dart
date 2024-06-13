@@ -15,6 +15,7 @@ class CustomInput extends StatefulWidget {
   final FocusNode? nextFocusNode;
   final FocusNode? previousFocusNode;
   final Function(String)? onChanged;
+  final bool search;
 
   const CustomInput({
     Key? key,
@@ -31,6 +32,7 @@ class CustomInput extends StatefulWidget {
     this.nextFocusNode,
     this.previousFocusNode,
     this.onChanged,
+    this.search = false,
   }) : super(key: key);
 
   @override
@@ -109,6 +111,11 @@ class _CustomInputState extends State<CustomInput> {
                         onPressed: _toggleObscureText,
                       )
                     : null,
+                    prefixIcon: widget.search
+                    ? const Icon(
+                        Icons.search,
+                        color: fontPlaceholder,
+                      ) : null,
               ),
               focusNode: widget.focusNode,
               onChanged: (text) {
