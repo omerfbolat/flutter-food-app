@@ -14,6 +14,7 @@ class CustomInput extends StatefulWidget {
   final FocusNode? focusNode;
   final FocusNode? nextFocusNode;
   final FocusNode? previousFocusNode;
+  final Function(String)? onChanged;
   final bool search;
 
   const CustomInput({
@@ -30,6 +31,7 @@ class CustomInput extends StatefulWidget {
     this.focusNode,
     this.nextFocusNode,
     this.previousFocusNode,
+    this.onChanged,
     this.search = false,
   }) : super(key: key);
 
@@ -46,7 +48,7 @@ class _CustomInputState extends State<CustomInput> {
     });
   }
 
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
@@ -68,7 +70,7 @@ class _CustomInputState extends State<CustomInput> {
         if (widget.title != null)
           Text(
             widget.title!,
-            style: TextStyle(
+            style: const TextStyle(
               color: font,
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -90,13 +92,13 @@ class _CustomInputState extends State<CustomInput> {
                 filled: true,
                 fillColor: infoLight,
                 hintText: widget.useHintAsPlaceholder ? widget.hintText : null,
-                hintStyle: TextStyle(color: fontPlaceholder),
+                hintStyle: const TextStyle(color: fontPlaceholder),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide.none,
                 ),
                 contentPadding:
-                    EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                 counterText: '',
                 suffixIcon: widget.isPassword
                     ? IconButton(
@@ -109,17 +111,19 @@ class _CustomInputState extends State<CustomInput> {
                         onPressed: _toggleObscureText,
                       )
                     : null,
-                prefixIcon: widget.search
-                    ? Icon(
+                    prefixIcon: widget.search
+                    ? const Icon(
                         Icons.search,
                         color: fontPlaceholder,
-                      )
-                    : null,
+                      ) : null,
               ),
               focusNode: widget.focusNode,
-              onChanged: (_) {
+              onChanged: (text) {
                 if (_controller.text.isEmpty) {
                   widget.previousFocusNode?.requestFocus();
+                }
+                if (widget.onChanged != null) {
+                  widget.onChanged!(text);
                 }
               },
               onSubmitted: (_) {

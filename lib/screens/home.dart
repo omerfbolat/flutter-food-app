@@ -4,7 +4,6 @@ import 'package:flutter_food_app/widget/input.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import '../redux/category/action.dart';
 import '../redux/store.dart';
-import '../redux/app/action.dart';
 import '../widget/categories.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../utils/theme.dart';
@@ -20,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       StoreProvider.of<AppStateWrapper>(context).dispatch(SetCategoriesAction([
         {'text': 'All', 'image': 'assets/images/all.png'},
         {'text': 'Hot Dog', 'image': 'assets/images/doghot.png'},
@@ -44,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     width: 45.0,
                     height: 45.0,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: grayscaleLight,
                       shape: BoxShape.circle,
                     ),
@@ -60,16 +59,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Deliver to',
                         style: TextStyle(fontSize: 16.0, color: primary),
                       ),
                       Row(children: [
-                        Text(
+                        const Text(
                           'Halal Lab office',
                           style: TextStyle(fontSize: 14.0, color: font),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 8,
                         ),
                         SvgPicture.asset(
@@ -80,11 +79,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       ]),
                     ],
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Container(
                     width: 45.0,
                     height: 45.0,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: background,
                       shape: BoxShape.circle,
                     ),
@@ -103,11 +102,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Container(
                             width: 25.0,
                             height: 25.0,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: primary,
                               shape: BoxShape.circle,
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 '2',
                                 style: TextStyle(
@@ -124,10 +123,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
-              Row(children: [
+              const Row(children: [
                 Text(
                   'Hey Halal, ',
                   style: TextStyle(fontSize: 16),
@@ -137,10 +136,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
               ]),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
-              CustomInput(
+              const CustomInput(
                 hintText: 'Search dishes, restaurants',
                 search: true,
               ),
@@ -157,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               CustomCard(
@@ -169,13 +168,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 time: '30 min',
                 onPressed: () => {},
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               CustomCard(
                 title: 'Rose Garden Restaurant',
                 image: 'assets/images/card1.jpg',
-                keys: ['Burger', 'Chicken', 'Rice', 'Wings'],
+                keys: const ['Burger', 'Chicken', 'Rice', 'Wings'],
                 point: 4.5,
                 delivery: 'Free',
                 time: '30 min',

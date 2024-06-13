@@ -38,6 +38,8 @@ dependencies:
   flutter_redux: ^0.10.0
   redux_thunk: ^0.4.0
   mongo_dart: ^0.10.0
+  crypto: ^3.0.3
+  jaguar_jwt: ^3.0.0
   flutter_svg: ^0.22.0
 
 dev_dependencies:
