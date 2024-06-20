@@ -19,7 +19,7 @@ class MongoDatabase {
   }
 
   static DbCollection get usersCollection => getCollection('users');
-  static DbCollection get productsCollection => getCollection('products');
+  static DbCollection get restaurantsCollection => getCollection('restaurants');
   static DbCollection get categoriesCollection => getCollection('categories');
   static DbCollection get ordersCollection => getCollection('orders');
 }

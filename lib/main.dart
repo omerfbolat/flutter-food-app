@@ -15,11 +15,6 @@ import 'screens/sign_up.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await MongoDatabase.connect();
-  var usersCollection = MongoDatabase.usersCollection;
-
-  var userDocs = await usersCollection.find().toList();
-
-  print(userDocs);
 
   final store = createStore();
 
