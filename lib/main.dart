@@ -3,7 +3,6 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'redux/store.dart';
 import 'db/mongodb.dart';
-
 import 'screens/splash_screen.dart';
 import 'screens/welcome.dart';
 import 'screens/login.dart';
@@ -11,6 +10,7 @@ import 'screens/home.dart';
 import 'screens/forget_password.dart';
 import 'screens/send_code.dart';
 import 'screens/sign_up.dart';
+import 'screens/food_details.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
           '/forget_password': (context) => const ForgetPasswordScreen(),
           '/send_code': (context) => const SendCodeScreen(),
           '/sign_up': (context) => const SignupScreen(),
+          '/food_details': (context) => const FoodDetailsScreen(),
         },
       ),
     );

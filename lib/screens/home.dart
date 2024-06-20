@@ -176,7 +176,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 point: 4.5,
                 delivery: 'Free',
                 time: '30 min',
-                onPressed: () => {},
+                onPressed: () =>
+                    {Navigator.pushNamed(context, '/food_details')},
               ),
               const SizedBox(
                 height: 10,
@@ -188,7 +189,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 point: 4.5,
                 delivery: 'Free',
                 time: '30 min',
-                onPressed: () => {},
+                onPressed: () =>
+                    {Navigator.pushNamed(context, '/food_details')},
               ),
             ],
           ),
