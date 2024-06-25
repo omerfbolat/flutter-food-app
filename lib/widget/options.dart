@@ -41,19 +41,15 @@ class _OptionsState extends State<CustomOptions> {
                   }
                 },
                 child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 8.0),
-                  padding: EdgeInsets.all(8.0),
+                  margin: EdgeInsets.only(right: 8.0),
+                  padding: EdgeInsets.all(18.0),
                   decoration: BoxDecoration(
-                    color: _selectedIndex == index
-                        ? activeButton
-                        : infoLight,
+                    color: _selectedIndex == index ? activeButton : infoLight,
                     borderRadius: BorderRadius.circular(50.0),
                   ),
                   child: Row(
                     children: [
                       Container(
-                        width: 44,
-                        height: 44,
                         child: Center(
                           child: Text(
                             category['text']!,

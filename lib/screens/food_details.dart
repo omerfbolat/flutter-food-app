@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food_app/widget/button.dart';
-import 'package:flutter_food_app/widget/categories.dart';
 import 'package:flutter_food_app/widget/image.dart';
 import 'package:flutter_food_app/widget/options.dart';
 import 'package:flutter_food_app/widget/qty.dart';
@@ -107,21 +106,28 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                           ],
                         ),
                         SizedBox(height: 7),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Image.asset(
-                              'assets/images/roseGarden.png',
-                              width: 22,
-                              height: 22,
-                            ),
-                            SizedBox(width: 11),
-                            Text(
-                              'Rose Garden',
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w400),
-                            ),
-                          ],
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/restaurant_detils');
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Image.asset(
+                                'assets/images/roseGarden.png',
+                                width: 22,
+                                height: 22,
+                              ),
+                              SizedBox(width: 11),
+                              Text(
+                                'Rose Garden',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(height: 7),
                         Row(

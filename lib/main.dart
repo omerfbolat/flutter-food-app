@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food_app/screens/restaurant_details.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'redux/store.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
           '/send_code': (context) => const SendCodeScreen(),
           '/sign_up': (context) => const SignupScreen(),
           '/food_details': (context) => const FoodDetailsScreen(),
+          '/restaurant_detils': (context) => const RestaurantScreen(),
         },
       ),
     );
