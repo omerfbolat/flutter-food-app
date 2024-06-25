@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_food_app/widget/button.dart';
 import 'package:flutter_food_app/widget/image.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../utils/theme.dart';
 
 class CustomMiniCard extends StatelessWidget {
