@@ -32,7 +32,6 @@ class CustomButton extends StatelessWidget {
               (double.parse(width.replaceAll('%', '')) / 100),
       height: height,
       child: ElevatedButton(
-        iconAlignment: IconAlignment.start,
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: color,
