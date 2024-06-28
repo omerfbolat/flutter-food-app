@@ -17,3 +17,4 @@ const Color border = Color.fromRGBO(237, 237, 237, 1);
 const Color emptyImage = Color.fromRGBO(152, 168, 184, 1);
 const Color background = Color.fromRGBO(18, 18, 35, 1);
 const Color activeButton = Color.fromRGBO(255, 210, 124, 1);
+const Color rectangle = Color.fromRGBO(255, 235, 228, 1);

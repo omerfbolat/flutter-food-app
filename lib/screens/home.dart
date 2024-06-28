@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food_app/redux/app/state.dart';
 import 'package:flutter_food_app/widget/card.dart';
 import 'package:flutter_food_app/widget/input.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -126,10 +127,19 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 24,
               ),
-              const Row(children: [
-                Text(
-                  'Hey Halal, ',
-                  style: TextStyle(fontSize: 16),
+              Row(children: [
+                StoreConnector<AppStateWrapper, AppState>(
+                  converter: (store) => store.state.appState,
+                  builder: (context, appState) {
+                    return Column(
+                      children: <Widget>[
+                        Text(
+                          'Hey ${appState.fullname.split(' ')[0]} ',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    );
+                  },
                 ),
                 Text(
                   'Good Afternoon!',
@@ -166,7 +176,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 point: 4.5,
                 delivery: 'Free',
                 time: '30 min',
-                onPressed: () => {},
+                onPressed: () =>
+                    {Navigator.pushNamed(context, '/food_details')},
               ),
               const SizedBox(
                 height: 10,
@@ -178,7 +189,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 point: 4.5,
                 delivery: 'Free',
                 time: '30 min',
-                onPressed: () => {},
+                onPressed: () =>
+                    {Navigator.pushNamed(context, '/food_details')},
               ),
             ],
           ),

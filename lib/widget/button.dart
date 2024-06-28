@@ -8,6 +8,8 @@ class CustomButton extends StatelessWidget {
   final Color textColor;
   final String width;
   final double height;
+  final bool circle;
+  final double round;
 
   const CustomButton({
     super.key,
@@ -17,6 +19,8 @@ class CustomButton extends StatelessWidget {
     this.textColor = white,
     this.width = '100%',
     this.height = 62.0,
+    this.circle = false,
+    this.round = 16,
   });
 
   @override
@@ -32,9 +36,11 @@ class CustomButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: color,
           foregroundColor: textColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
+          shape: circle
+              ? const CircleBorder()
+              : RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(round),
+                ),
           textStyle: const TextStyle(fontSize: 16),
         ),
         child: Text(text),
